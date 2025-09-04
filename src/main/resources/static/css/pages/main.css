@@ -1,0 +1,214 @@
+/* --- Hero & Welcome Sections --- */
+.hero-section {
+    height: 500px;
+    background:  url('../../images/hero-background.jpg') center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
+
+.welcome-section {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #F8F9FA;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.welcome-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.welcome-section p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* --- Content & Card Section Titles --- */
+.content-section {
+    margin-bottom: 80px;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* --- Card Common Styles --- */
+.package-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.card-image-wrapper {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.package-card:hover .card-image {
+    transform: scale(1.05);
+}
+
+/* --- 인기 상품 카드 그리드 & 스타일 --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.popular-card .card-image-wrapper {
+    height: 350px;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px;
+    color: white;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.overlay-title {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.overlay-subtitle {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* --- 일반 추천 상품 카드 그리드 & 스타일 --- */
+.card-grid-normal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.normal-card .card-image-wrapper {
+    height: 240px;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 5px;
+}
+
+.card-location {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.card-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: right;
+}
+
+/* 기존 CSS 코드 아래에 추가 */
+
+/* ========================= Swiper 슬라이드 공통 스타일 ========================= */
+.swiper {
+    width: 100%;
+    height: 100%;
+    padding: 20px 0 50px 0; /* 슬라이드 하단에 여백 추가 (페이지네이션 공간) */
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* 슬라이드 아이템이 중앙에 오도록 Flexbox 사용 (선택사항) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 슬라이드 내부의 카드 스타일이 잘 적용되도록 */
+.swiper-slide .package-card {
+    width: 100%; /* 슬라이드 너비에 꽉 차게 */
+    height: 100%;
+    margin: 0;
+}
+
+/* ========================= Swiper 네비게이션 버튼 스타일 ========================= */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #ffffff; /* 버튼 화살표 색상 */
+    background-color: rgba(0, 0, 0, 0.3); /* 버튼 배경색 */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* 화살표 아이콘 크기 조정 */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ========================= Swiper 페이지네이션(점) 스타일 ========================= */
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #cccccc;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #007bff; /* 활성화된 점 색상 */
+}

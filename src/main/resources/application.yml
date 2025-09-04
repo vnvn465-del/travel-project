@@ -1,0 +1,29 @@
+#포트번호 설정
+server:
+  port: 8090
+
+
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always
+
+
+
+
+
+  #Mysql설정
+  datasource:
+    url: jdbc:mysql://localhost:3306/travel
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: travel
+    password: 1234

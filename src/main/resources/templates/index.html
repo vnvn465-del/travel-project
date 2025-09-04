@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><title>My Travel - 최고의 여행 파트너</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <!-- 메인 페이지 전용 스타일 로드 -->
+    <link rel="stylesheet" th:href="@{/css/pages/main.css}">
+    <!-- Swiper.js CSS 추가 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+</head>
+<body>
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+<section class="hero-section">
+    <div class="hero-content">
+        <h1>HELLO, MY TRAVEL</h1>
+        <p>Make sure to experience that the magic moment, awaken in a strange town.</p>
+    </div>
+</section>
+<section class="welcome-section">
+    <h2>Welcome to MyTravel</h2>
+    <p>마이트래블에서 모든 호텔과 숙소를 한눈에 비교하세요. 전 세계의 가장 좋은 상품을 만날 수 있습니다.<br>마이트래블이 최고의 예약을 제공합니다.</p>
+</section>
+<main class="main-content">
+    <!-- ========================= 인기 여행 상품 섹션 ========================= -->
+    <section class="content-section">
+        <h2 class="section-title">인기 여행 상품</h2>
+        <!-- Swiper -->
+        <div class="swiper popular-swiper">
+            <div class="swiper-wrapper">
+                <!-- 기존 th:each 루프를 swiper-slide 클래스에 적용 -->
+                <div class="swiper-slide" th:each="pkg : ${popularPackages}">
+                    <div class="package-card popular-card">
+                        <a th:href="@{/packages/{id}(id=${pkg.id})}" class="card-link">
+                            <div class="card-image-wrapper">
+                                <img th:src="@{/images/{image}(image=${pkg.image})}" alt="Package Image" class="card-image">
+                                <div class="overlay">
+                                    <h3 class="overlay-title" th:text="${pkg.city}">도시명</h3>
+                                    <p class="overlay-subtitle" th:text="${pkg.country}">국가명</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 슬라이드 좌우 버튼 -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- ========================= 추천 여행 상품 섹션 ========================= -->
+    <section class="content-section">
+        <h2 class="section-title">추천 여행 상품</h2>
+        <!-- Swiper -->
+        <div class="swiper normal-swiper">
+            <div class="swiper-wrapper">
+                <!-- 기존 th:each 루프를 swiper-slide 클래스에 적용 -->
+                <div class="swiper-slide" th:each="pkg : ${normalPackages}">
+                    <div class="package-card normal-card">
+                        <a th:href="@{/packages/{id}(id=${pkg.id})}" class="card-link">
+                            <div class="card-image-wrapper">
+                                <img th:src="@{/images/{image}(image=${pkg.image})}" alt="Package Image" class="card-image">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title" th:text="${pkg.name}">상품 이름</h3>
+                                <p class="card-location" th:text="|${pkg.city}, ${pkg.country}|">도시, 국가</p>
+                                <p class="card-price" th:text="|₩${#numbers.formatInteger(pkg.price, 3, 'COMMA')}|">가격</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 페이지네이션 (점) -->
+            <div class="swiper-pagination"></div>
+            <!-- 슬라이드 좌우 버튼 -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+</main>
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+<!-- Swiper.js JS 추가 (</body> 태그 바로 위에 추가) -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- 슬라이드 초기화 스크립트 (아래 4단계에서 작성) -->
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

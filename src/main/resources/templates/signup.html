@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><title>회원가입 - My Travel</title>
+    <!-- 공통 스타일 로드 -->
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <!-- 폼 기본 스타일 로드 -->
+    <link rel="stylesheet" th:href="@{/css/forms.css}">
+    <!-- 회원가입 페이지 전용 스타일 로드 -->
+    <link rel="stylesheet" th:href="@{/css/pages/signup.css}">
+</head>
+<body>
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+
+<div class="form-container">
+    <h2>회원가입</h2>
+    <form th:action="@{/users/signup}" th:object="${userSignUpDto}" method="post">
+        <!-- ===== 글로벌 에러 메시지 ===== -->
+        <div th:if="${#fields.hasGlobalErrors()}"><p class="error-message" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p></div>
+
+        <!-- ===== 이름 ===== -->
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{name}" class="form-input">
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message"></p>
+        </div>
+
+        <!-- ===== 이메일 ===== -->
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" th:field="*{email}" class="form-input" placeholder="example@email.com">
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></p>
+        </div>
+
+        <!-- ===== 비밀번호 ===== -->
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" th:field="*{password}" class="form-input" placeholder="비밀번호를 입력하세요">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></p>
+        </div>
+
+        <!-- ===== 비밀번호 확인 ===== -->
+        <div class="form-group">
+            <label for="passwordConfirm">비밀번호 확인</label>
+            <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}" class="form-input" placeholder="비밀번호를 다시 한번 입력하세요">
+            <p th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}" class="error-message"></p>
+        </div>
+
+        <!-- ===== 생년월일 ===== -->
+        <div class="form-group">
+            <label for="birthdate">생년월일</label>
+            <input type="date" id="birthdate" th:field="*{birthdate}" class="form-input">
+            <p th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}" class="error-message"></p>
+        </div>
+
+        <!-- ===== 휴대폰 번호 ===== -->
+        <div class="form-group">
+            <label for="phoneNumber">휴대폰 번호</label>
+            <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" class="form-input" placeholder="'-' 없이 숫자만 입력">
+            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error-message"></p>
+        </div>
+
+        <!-- ===== 주소 (API 연동) ===== -->
+        <div class="form-group">
+            <label>주소</label>
+            <div class="address-group">
+                <input type="text" id="postcode" th:field="*{postcode}" class="form-input" placeholder="우편번호" readonly>
+                <button type="button" id="btn-find-address" class="btn-find-address">주소 찾기</button>
+            </div>
+            <input type="text" id="address" th:field="*{address}" class="form-input" placeholder="주소" readonly>
+            <input type="text" id="addressDetail" th:field="*{addressDetail}" class="form-input" placeholder="상세주소를 입력하세요">
+            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="error-message"></p>
+            <p th:if="${#fields.hasErrors('addressDetail')}" th:errors="*{addressDetail}" class="error-message"></p>
+        </div>
+
+        <button type="submit" class="btn-submit">가입하기</button>
+    </form>
+</div>
+
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+
+<!-- Daum 우편번호 서비스 API 스크립트 로드 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 회원가입 페이지 전용 스크립트 로드 -->
+<script th:src="@{/js/signup.js}"></script>
+
+</body>
+</html>

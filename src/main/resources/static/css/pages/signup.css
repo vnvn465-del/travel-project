@@ -1,0 +1,40 @@
+/* 주소 입력 필드 그룹 스타일 */
+.address-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 요소 사이의 간격 */
+    margin-bottom: 10px; /* 아래 주소 필드와의 간격 */
+}
+
+/* 우편번호 필드는 너비를 고정하고, 주소 찾기 버튼이 옆에 오도록 함 */
+.address-group #postcode {
+    flex-grow: 1; /* 남은 공간을 모두 차지 */
+}
+
+/* 주소나 우편번호처럼 사용자가 직접 수정하지 않는 필드 스타일 */
+input[readonly] {
+    background-color: #f2f2f2;
+    cursor: not-allowed;
+}
+
+/* 주소 찾기 버튼 스타일 */
+.btn-find-address {
+    flex-shrink: 0; /* 버튼 너비가 줄어들지 않도록 설정 */
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    color: #333;
+    cursor: pointer;
+    white-space: nowrap; /* 버튼 텍스트가 줄바꿈되지 않도록 */
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.btn-find-address:hover {
+    background-color: #e9e9e9;
+}
+
+/* 상세주소 입력 필드와 주소 그룹 사이의 간격 조정 */
+#address {
+    margin-bottom: 10px;
+}

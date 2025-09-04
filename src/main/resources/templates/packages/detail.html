@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|${package.name} - My Travel|">상품 상세</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <!-- 상세 페이지 전용 스타일 -->
+    <link rel="stylesheet" th:href="@{/css/pages/detail.css}">
+    <!-- Swiper.js CSS (이미지 갤러리용) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+</head>
+<body>
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+
+<div class="detail-container">
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="main-content">
+        <!-- 상품명 헤더 -->
+        <header class="package-header">
+            <p class="package-location" th:text="|${package.country} / ${package.city}|">국가 / 도시</p>
+            <h1 th:text="${package.name}">상품 이름</h1>
+        </header>
+
+        <!-- 이미지 갤러리 -->
+        <section class="gallery-section">
+            <div class="swiper gallery-main">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" th:each="img : ${package.detailImages}">
+                        <img th:src="@{/images/{image}(image=${img})}" alt="상세 이미지">
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div class="swiper gallery-thumbs">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" th:each="img : ${package.detailImages}">
+                        <img th:src="@{/images/{image}(image=${img})}" alt="썸네일 이미지">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 정보 탭 -->
+        <section class="tab-section">
+            <nav class="tab-nav">
+                <button class="tab-button active" data-tab="tab-info">여행 정보</button>
+                <button class="tab-button" data-tab="tab-review">여행 후기</button>
+            </nav>
+            <div class="tab-content">
+                <div id="tab-info" class="tab-panel active">
+                    <h2>상세 일정</h2>
+                    <!-- 복잡한 로직을 모두 제거하고, 단순히 description 필드를 출력합니다. -->
+                    <p class="itinerary" th:utext="${package.description}">
+                        상세 여행 정보가 여기에 표시됩니다.
+                    </p>
+                </div>
+                <div id="tab-review" class="tab-panel">
+                    <h2>여행 후기</h2>
+                    <p>아직 작성된 후기가 없습니다.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 예약 사이드바 -->
+    <aside class="sidebar">
+        <div class="booking-box">
+            <div class="price-info">
+                <span>1인 상품 가격</span>
+                <strong th:text="|₩${#numbers.formatInteger(package.price, 3, 'COMMA')}|">₩2,500,000</strong>
+            </div>
+            <form action="#" method="post" class="booking-form">
+                <div class="form-group">
+                    <label for="departure-date">출발일 선택</label>
+                    <input type="date" id="departure-date" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="travelers">인원</label>
+                    <input type="number" id="travelers" value="1" min="1" class="form-input">
+                </div>
+                <button type="submit" class="btn-primary">예약하기</button>
+                <button type="button" class="btn-outline">찜하기</button>
+            </form>
+        </div>
+    </aside>
+</div>
+
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+
+<!-- Swiper.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- 상세 페이지 전용 스크립트 -->
+<script th:src="@{/js/detail.js}"></script>
+</body>
+</html>

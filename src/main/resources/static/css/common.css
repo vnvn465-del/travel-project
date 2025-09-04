@@ -1,0 +1,107 @@
+/* --- Global & Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #FFF;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- 공통 레이아웃 컨테이너 --- */
+.main-content, .header-container, .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header & Nav --- */
+.site-header {
+    position: sticky;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #007BFF;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 35px;
+}
+
+.main-nav a {
+    font-weight: 500;
+    color: #555;
+    transition: color 0.2s;
+}
+
+.main-nav a:hover {
+    color: #007BFF;
+}
+
+/* --- Footer --- */
+.site-footer {
+    background-color: #343A40;
+    color: #FFF;
+    padding-top: 60px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.footer-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section a, .footer-section p {
+    color: #ADB5BD;
+    font-size: 0.9rem;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 40px;
+    border-top: 1px solid #495057;
+    color: #868E96;
+    font-size: 0.85rem;
+}

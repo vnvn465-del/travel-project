@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><title>로그인 - My Travel</title>
+    <!-- 공통 스타일 로드 -->
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <!-- 폼 전용 스타일 로드 -->
+    <link rel="stylesheet" th:href="@{/css/forms.css}">
+</head>
+<body>
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+<div class="form-container">
+    <h2>로그인</h2>
+    <form th:action="@{/users/login}" method="post">
+        <!-- 로그인 실패 시 에러 메시지 -->
+        <div th:if="${param.error}" class="error-message">
+            이메일 또는 비밀번호를 확인해주세요.
+        </div>
+
+        <!-- 이메일 입력 필드 -->
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" class="form-input">
+        </div>
+
+        <!-- 비밀번호 입력 필드 -->
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" class="form-input">
+        </div>
+
+        <!-- ======== 버튼 그룹 (수정된 부분) ======== -->
+        <div class="button-group">
+            <!-- 기존 로그인 버튼 -->
+            <button type="submit" class="btn-submit">로그인</button>
+            <!-- 회원가입 페이지로 이동하는 링크 버튼 (추가) -->
+            <a th:href="@{/users/signup}" class="btn-secondary">회원가입</a>
+        </div>
+        <!-- ======================================= -->
+
+    </form>
+</div>
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+</body>
+</html>
