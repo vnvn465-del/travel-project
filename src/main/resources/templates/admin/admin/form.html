@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 - 상품 등록</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin-common.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/package-form.css}">
+</head>
+<body>
+<div class="admin-container">
+    <header class="admin-header">
+        <h1 class="admin-title" th:text="${packageFormDto.id == null} ? '새 상품 등록' : '상품 수정'"></h1>
+    </header>
+
+    <form role="form" method="post" enctype="multipart/form-data" th:object="${packageFormDto}">
+        <input type="hidden" th:field="*{id}">
+
+        <h2 class="form-section-title">기본 정보</h2>
+        <div class="form-group">
+            <label th:for="name">상품명</label>
+            <input type="text" th:field="*{name}" class="form-control" placeholder="예: 스위스 일주 8일">
+        </div>
+        <!-- ... TravelPackage의 다른 필드들을 form-group으로 추가 ... -->
+
+        <h2 class="form-section-title">상품 이미지</h2>
+        <div class="form-group">
+            <label for="imageFiles">이미지 등록 (첫 번째 이미지가 대표 썸네일이 됩니다)</label>
+            <input type="file" id="imageFiles" name="imageFiles" class="form-control" multiple>
+            <div id="image-preview-container" class="image-preview-container"></div>
+        </div>
+
+        <h2 class="form-section-title">상세 일정</h2>
+        <div id="itinerary-container">
+            <!-- JavaScript로 동적으로 추가될 영역 -->
+        </div>
+        <button type="button" id="add-itinerary-btn" class="btn btn-secondary">일정 추가</button>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <button type="submit" class="btn btn-primary" style="padding: 15px 50px;">저장하기</button>
+        </div>
+    </form>
+</div>
+
+<script th:src="@{/js/admin/package-form.js}"></script>
+</body>
+</html>

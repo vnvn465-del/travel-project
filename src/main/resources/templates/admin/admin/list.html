@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>관리자 - 상품 목록</title>
+  <link rel="stylesheet" th:href="@{/css/admin/admin-common.css}">
+</head>
+<body>
+<div class="admin-container">
+  <header class="admin-header">
+    <h1 class="admin-title">상품 관리</h1>
+    <a th:href="@{/admin/packages/new}" class="btn btn-primary">새 상품 등록</a>
+  </header>
+
+  <main>
+    <table class="admin-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>대표 이미지</th>
+        <th>상품명</th>
+        <th>국가/도시</th>
+        <th>가격</th>
+        <th>관리</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="${packages.isEmpty()}">
+        <td colspan="6" style="text-align: center;">등록된 상품이 없습니다.</td>
+      </tr>
+      <tr th:each="pkg : ${packages}">
+        <td th:text="${pkg.id}"></td>
+        <td>
+          <img th:if="${pkg.thumbnailImageUrl}" th:src="${pkg.thumbnailImageUrl}" width="120" alt="썸네일">
+        </td>
+        <td th:text="${pkg.name}"></td>
+        <td th:text="|${pkg.country} / ${pkg.city}|"></td>
+        <td th:text="|₩${#numbers.formatInteger(pkg.price, 3, 'COMMA')}|"></td>
+        <td>
+          <a th:href="@{'/admin/packages/' + ${pkg.id} + '/edit'}" class="btn btn-secondary">수정</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </main>
+</div>
+</body>
+</html>

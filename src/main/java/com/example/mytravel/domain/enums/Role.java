@@ -1,4 +1,4 @@
-package com.example.mytravel.domain;
+package com.example.mytravel.domain.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 @Getter @RequiredArgsConstructor

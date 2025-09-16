@@ -1,6 +1,6 @@
 package com.example.mytravel.dto; // DTO 패키지 경로는 실제 프로젝트에 맞게 수정하세요.
 
-import com.example.mytravel.domain.Role;
+import com.example.mytravel.domain.enums.Role;
 import com.example.mytravel.domain.User;
 import jakarta.validation.constraints.*;
 import lombok.Getter;

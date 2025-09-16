@@ -1,30 +1,36 @@
 package com.example.mytravel.controller;
 
-import com.example.mytravel.dto.PackageDetailDto; // 2단계에서 생성할 DTO
-import com.example.mytravel.service.PackageService; // 서비스 클래스
+import com.example.mytravel.dto.PackageDetailDto;
+import com.example.mytravel.dto.PackageListDto;
+import com.example.mytravel.service.PackageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/packages")
+@RequiredArgsConstructor
 public class PackageController {
 
     private final PackageService packageService;
 
+    // 전체 상품 목록 페이지
+    @GetMapping
+    public String packageListPage(Model model) {
+        List<PackageListDto> packages = packageService.findAllPackages();
+        model.addAttribute("packages", packages);
+        return "packages/list"; // templates/packages/list.html 렌더링
+    }
+
+    // 상품 상세 페이지
     @GetMapping("/{packageId}")
-    public String packageDetail(@PathVariable Long packageId, Model model) {
-        // 서비스로부터 packageId에 해당하는 데이터를 DTO 형태로 받아옵니다.
-        PackageDetailDto packageDto = packageService.getPackageDetail(packageId);
-
-        // 모델에 담아서 View로 전달합니다.
-        model.addAttribute("package", packageDto);
-
-        // 보여줄 HTML 파일의 경로를 반환합니다.
-        return "packages/detail";
+    public String packageDetailPage(@PathVariable("packageId") Long packageId, Model model) {
+        PackageDetailDto packageDetail = packageService.findPackageDetail(packageId);
+        model.addAttribute("package", packageDetail);
+        return "packages/detail"; // templates/packages/detail.html 렌더링
     }
 }

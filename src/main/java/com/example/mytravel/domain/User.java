@@ -1,32 +1,37 @@
 package com.example.mytravel.domain;
+
+import com.example.mytravel.domain.enums.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
-@Entity @Table(name = "users")
-@Getter @NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "users")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String email;
+    @Column(unique = true, nullable = false, length = 100)
+    private String email; // 로그인 ID
 
     @Column(nullable = false)
-    private String password;
+    private String password; // 암호화된 비밀번호
+
+    @Column(nullable = false, length = 50)
+    private String name; // 사용자 이름
 
     @Column(nullable = false)
-    private String name;
+    private LocalDate birthdate; // 생년월일
 
-    // ============== [추가된 컬럼] ==============
-    @Column(nullable = false)
-    private LocalDate birthdate; // 생년월일 (날짜 형식을 위해 LocalDate 타입 사용)
-
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String phoneNumber; // 휴대폰 번호
 
     @Column(nullable = false)
@@ -34,23 +39,12 @@ public class User {
 
     @Column(nullable = false)
     private String addressDetail; // 상세주소
-    // ==========================================
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private Role role; // 권한 (USER, ADMIN)
 
-    @Builder
-    public User(String email, String password, String name, LocalDate birthdate, String phoneNumber, String address, String addressDetail, Role role) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        // ============== [추가된 필드 생성자] ==============
-        this.birthdate = birthdate;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.addressDetail = addressDetail;
-        // =============================================
-        this.role = role;
-    }
+
+
+
 }

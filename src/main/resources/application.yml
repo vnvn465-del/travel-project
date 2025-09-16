@@ -3,11 +3,11 @@ server:
   port: 8090
 
 
-
+uploadPath: C:/Users/home/Desktop/coding/springboot/workspace/Trip/images/ # 실제 이미지를 저장할 로컬 컴퓨터의 폴더 경로
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     defer-datasource-initialization: true
     show-sql: true
     properties:
@@ -16,7 +16,9 @@ spring:
   sql:
     init:
       mode: always
-
+  web:
+    resources:
+      static-locations: classpath:/static/, file:${uploadPath} # 외부 경로를 정적 리소스로 추가
 
 
 

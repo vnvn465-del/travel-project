@@ -32,8 +32,7 @@
                     <div class="package-card popular-card">
                         <a th:href="@{/packages/{id}(id=${pkg.id})}" class="card-link">
                             <div class="card-image-wrapper">
-                                <img th:src="@{/images/{image}(image=${pkg.image})}" alt="Package Image" class="card-image">
-                                <div class="overlay">
+                                <img th:src="${pkg.thumbnailImageUrl}" alt="Package Image" class="card-image">                                <div class="overlay">
                                     <h3 class="overlay-title" th:text="${pkg.city}">도시명</h3>
                                     <p class="overlay-subtitle" th:text="${pkg.country}">국가명</p>
                                 </div>
@@ -59,7 +58,7 @@
                     <div class="package-card normal-card">
                         <a th:href="@{/packages/{id}(id=${pkg.id})}" class="card-link">
                             <div class="card-image-wrapper">
-                                <img th:src="@{/images/{image}(image=${pkg.image})}" alt="Package Image" class="card-image">
+                                <img th:src="${pkg.thumbnailImageUrl}" alt="Package Image" class="card-image">
                             </div>
                             <div class="card-content">
                                 <h3 class="card-title" th:text="${pkg.name}">상품 이름</h3>
