@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<!-- Thymeleaf와 Thymeleaf Spring Security Extras를 사용하기 위한 네임스페이스 선언 -->
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- th:fragment 속성을 사용하여 이 header 블록을 다른 페이지에서 재사용할 수 있도록 정의합니다. -->
 <header class="site-header" th:fragment="headerFragment">
     <div class="header-container">
+        <!-- 로고: 클릭 시 메인 페이지('/')로 이동합니다. -->
         <a th:href="@{/}" class="logo">MY TRAVEL</a>
+
+        <!-- 메인 네비게이션 메뉴 -->
         <nav class="main-nav">
-            <ul>
-                <li><a href="#">호텔</a></li>
+            <ul class="nav-list">
+                <!-- 모든 사용자에게 공통으로 보이는 메뉴 -->
+                <li><a th:href="@{/packages}">전체 여행 상품</a></li>
                 <li><a href="#">항공</a></li>
-                <li><a href="#">투어</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/users/login}">로그인</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/users/signup}">회원가입</a></li>
-                <li sec:authorize="isAuthenticated()"><a href="#">마이페이지</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/users/logout}">로그아웃</a></li>
+                <li><a href="#">호텔</a></li>
+
+                <!-- ======================================================= -->
+                <!-- 1. 비로그인(익명) 사용자에게만 보이는 메뉴 -->
+                <!-- sec:authorize="isAnonymous()" : 현재 사용자가 익명일 경우에만 이 블록을 렌더링합니다. -->
+                <!-- ======================================================= -->
+                <th:block sec:authorize="isAnonymous()">
+                    <li><a th:href="@{/users/login}">로그인</a></li>
+                    <li><a th:href="@{/users/signup}">회원가입</a></li>
+                </th:block>
+
+                <!-- ======================================================= -->
+                <!-- 2. 로그인(인증된) 사용자에게만 보이는 메뉴 -->
+                <!-- sec:authorize="isAuthenticated()" : 현재 사용자가 인증되었을 경우에만 이 블록을 렌더링합니다. -->
+                <!-- ======================================================= -->
+                <th:block sec:authorize="isAuthenticated()">
+                    <li class="user-info">
+                        <!-- sec:authentication="name" : 현재 인증된 사용자의 username(우리 시스템에서는 email)을 표시합니다. -->
+                        <span sec:authentication="name" class="username"></span>님 환영합니다.
+                    </li>
+                    <li><a th:href="@{/users/mypage}">마이페이지</a></li>
+                    <li>
+                        <!-- 로그아웃은 POST 방식으로 요청해야 CSRF 공격에 안전합니다. -->
+                        <!-- 따라서 a 태그 대신 form 태그와 button을 사용합니다. -->
+                        <form th:action="@{/users/logout}" method="post" class="logout-form">
+                            <button type="submit" class="nav-link-button">로그아웃</button>
+                        </form>
+                    </li>
+                </th:block>
             </ul>
         </nav>
     </div>

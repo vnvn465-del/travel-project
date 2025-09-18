@@ -1,11 +1,11 @@
-package com.example.mytravel.dto; // DTO 패키지 경로는 실제 프로젝트에 맞게 수정하세요.
+package com.example.mytravel.dto;
 
-import com.example.mytravel.domain.enums.Role;
-import com.example.mytravel.domain.User;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.crypto.password.PasswordEncoder; // PasswordEncoder import
 
 import java.time.LocalDate;
 
@@ -32,36 +32,14 @@ public class UserSignUpDto {
     private LocalDate birthdate;
 
     @NotBlank(message = "휴대폰 번호는 필수 입력 항목입니다.")
-    @Pattern(regexp = "^[0-9]{10,11}$", message = "'-' 없이 10~11자리의 숫자만 입력해주세요.")
     private String phoneNumber;
 
-    // 주소 관련 필드는 Validation이 필요하다면 추가하세요.
-    private String address;
-    private String addressDetail;
-    // 우편번호 필드는 HTML에 있지만 User 엔티티에는 없으므로, DTO에만 존재하게 됩니다.
-    private String postcode;
+    // th:field="*{postcode}" 와 연결될 필드
+    private String postcode; // 우편번호는 필수가 아닐 수 있으므로 @NotBlank 제외
 
-    // =================================================================
-    // ============== 아래 toEntity 메소드를 추가해주세요 ==============
-    // =================================================================
-    /**
-     * DTO의 정보를 바탕으로 User 엔티티를 생성합니다.
-     * 이때, 비밀번호는 PasswordEncoder를 통해 암호화됩니다.
-     * @param passwordEncoder 비밀번호 암호화를 위한 인코더
-     * @return 생성된 User 엔티티
-     */
-    public User toEntity(PasswordEncoder passwordEncoder) {
-        return User.builder()
-                .email(this.email)
-                .name(this.name)
-                // ★★★ 중요: 비밀번호는 반드시 암호화해서 저장해야 합니다.
-                .password(passwordEncoder.encode(this.password))
-                .birthdate(this.birthdate)
-                .phoneNumber(this.phoneNumber)
-                .address(this.address)
-                .addressDetail(this.addressDetail)
-                // 회원가입 시 기본 권한을 USER로 설정합니다.
-                .role(Role.USER)
-                .build();
-    }
+    @NotBlank(message = "주소는 필수 입력 항목입니다.")
+    private String address;
+
+    @NotBlank(message = "상세주소는 필수 입력 항목입니다.")
+    private String addressDetail;
 }

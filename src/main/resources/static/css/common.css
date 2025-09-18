@@ -27,42 +27,121 @@ ul {
     padding: 0 20px;
 }
 
-/* --- Header & Nav --- */
+/* ===================================================================
+   Header Styles (헤더 스타일)
+   =================================================================== */
+
+/* --- 1. 헤더 기본 레이아웃 및 컨테이너 --- */
 .site-header {
-    position: sticky;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 은은한 그림자 효과 */
+    position: sticky; /* 스크롤 시 상단에 고정 */
     top: 0;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    border-bottom: 1px solid #EAEAEA;
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 z-index 설정 */
 }
 
 .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
+    justify-content: space-between; /* 로고와 네비게이션을 양 끝으로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
 }
 
+/* --- 2. 로고 스타일 --- */
 .logo {
-    font-size: 1.5rem;
+    font-size: 28px;
     font-weight: 700;
-    color: #007BFF;
+    /* var() 함수: --primary-color 변수가 없으면 #007bff를 기본값으로 사용 */
+    color: var(--primary-color, #007bff);
+    text-decoration: none;
 }
 
-.main-nav ul {
+/* --- 3. 네비게이션 메뉴 스타일 --- */
+.main-nav .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    gap: 35px;
+    align-items: center;
+    gap: 25px; /* 메뉴 아이템 사이의 간격 */
 }
 
 .main-nav a {
+    text-decoration: none;
+    color: #333;
     font-weight: 500;
-    color: #555;
-    transition: color 0.2s;
+    font-size: 16px;
+    position: relative;
+    padding: 5px 0;
 }
 
-.main-nav a:hover {
-    color: #007BFF;
+/* 메뉴 아이템에 마우스 올렸을 때 밑줄 효과 */
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color, #007bff);
+    transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+/* --- 4. 로그인 상태 관련 메뉴 스타일 --- */
+.user-info {
+    font-size: 15px;
+    color: #555;
+    white-space: nowrap; /* "OOO님 환영합니다"가 줄바꿈되지 않도록 */
+}
+
+.user-info .username {
+    font-weight: 600;
+    color: var(--primary-color, #007bff);
+}
+
+/* 로그아웃 form 태그가 레이아웃에 영향을 주지 않도록 초기화 */
+.logout-form {
+    margin: 0;
+    padding: 0;
+    display: inline; /* 다른 메뉴 아이템과 같은 줄에 있도록 */
+}
+
+/* 로그아웃 button을 일반 링크(a 태그)처럼 보이게 스타일링 */
+.nav-link-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 16px;
+    font-family: inherit; /* body의 폰트를 상속받음 */
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+}
+
+/* 로그아웃 버튼에도 동일한 호버 효과 적용 */
+.nav-link-button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color, #007bff);
+    transition: width 0.3s ease;
+}
+
+.nav-link-button:hover::after {
+    width: 100%;
 }
 
 /* --- Footer --- */
