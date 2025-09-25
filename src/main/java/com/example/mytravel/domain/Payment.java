@@ -2,13 +2,19 @@ package com.example.mytravel.domain;
 
 import com.example.mytravel.domain.enums.PaymentStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+
 import java.time.LocalDateTime;
 
+@Builder
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

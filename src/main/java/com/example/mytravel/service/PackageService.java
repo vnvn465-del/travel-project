@@ -48,4 +48,13 @@ public class PackageService {
         // DTO의 정적 팩토리 메소드를 사용하여 변환
         return PackageDetailDto.fromEntity(travelPackage);
     }
+
+
+    public PackageListDto findPackageForBooking(Long packageId) {
+        TravelPackage travelPackage = travelPackageRepository.findById(packageId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 상품을 찾을 수 없습니다. ID: " + packageId));
+
+        // 기존에 만들어 둔 PackageListDto 변환 로직을 재사용합니다.
+        return new PackageListDto(travelPackage);
+    }
 }

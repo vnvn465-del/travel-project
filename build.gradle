@@ -12,6 +12,8 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    // JitPack 리포지토리를 추가하여 GitHub 패키지를 가져올 수 있도록 합니다.
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -34,8 +36,7 @@ dependencies {
     // Thymeleaf 설정
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    // 소스코드 자동 리로드
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 
     // 유효성 검사 기능 설정
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -44,8 +45,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     // 타임리프에서 스프링 시큐리티를 사용하기 위한 설정
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
     // 스프링 시큐리티를 테스트하기 위한 설정
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // JitPack 리포지토리에 있는 아임포트 라이브러리
+    implementation 'com.github.iamport:iamport-rest-client-java:0.2.23'
 
 }
 

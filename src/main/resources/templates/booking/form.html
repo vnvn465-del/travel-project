@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>예약 및 결제 - My Travel</title>
+    <!-- CSRF 토큰을 JavaScript에서 사용하기 위해 meta 태그에 추가 -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/pages/booking.css}">
+
+    <!-- jQuery (아임포트 라이브러리가 jQuery에 의존) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 아임포트 라이브러리 -->
+    <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+
+<div class="booking-page-container">
+    <header class="booking-header">
+        <h1>예약 정보 확인 및 결제</h1>
+    </header>
+
+    <main class="booking-container">
+        <!-- 숨겨진 데이터: JavaScript에서 사용 -->
+        <input type="hidden" id="packageId" th:value="${bookingInfo.packageId}">
+        <input type="hidden" id="departureDate" th:value="${bookingInfo.departureDate}">
+        <input type="hidden" id="travelerCount" th:value="${bookingInfo.travelerCount}">
+
+        <!-- 예약 정보 표시 영역 -->
+        <section class="info-column">
+            <div class="summary-card">
+                <div class="summary-card-header">예약 상품 정보</div>
+                <div class="summary-card-body">
+                    <div class="product-info">
+                        <img th:src="${packageInfo.thumbnailImageUrl}" alt="상품 이미지" class="product-image">
+                        <div class="product-details">
+                            <h3 th:text="${packageInfo.name}">상품 이름</h3>
+                            <p th:text="|${packageInfo.country} / ${packageInfo.city}|"></p>
+                        </div>
+                    </div>
+                    <div class="booking-details-list">
+                        <dl><dt>출발일</dt><dd th:text="${bookingInfo.departureDate}"></dd></dl>
+                        <dl><dt>여행 인원</dt><dd th:text="|총 ${bookingInfo.travelerCount}명|"></dd></dl>
+                        <dl><dt>1인 상품가</dt><dd th:text="|₩${#numbers.formatInteger(packageInfo.price, 3, 'COMMA')}|"></dd></dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 결제 진행 영역 -->
+        <aside class="payment-column">
+            <div class="payment-box">
+                <div class="final-price">
+                    <div>
+                        <span>최종 결제 금액</span>
+                        <strong th:text="|₩${#numbers.formatInteger(totalPrice, 3, 'COMMA')}|"></strong>
+                    </div>
+                </div>
+                <button type="button" id="payment-btn">결제하기</button>
+            </div>
+        </aside>
+    </main>
+</div>
+
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+<script th:src="@{/js/booking.js}"></script>
+</body>
+</html>

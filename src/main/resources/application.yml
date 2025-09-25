@@ -29,3 +29,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: travel
     password: 1234
+
+iamport:
+  api:
+    key: 2526472334682076
+    secret: XoR5Llp4ywQTButyoRtNmzl3RJxGTxfwRBTmnodPdYlwAetiBDdHloFrMmhXZlyhhKZC4DL3w3kIa6AJ

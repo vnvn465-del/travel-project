@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -23,7 +24,7 @@ public class SecurityConfig {
                         // ★★★★★ 이 부분이 가장 중요합니다. ★★★★★
                         // 로그인 페이지 자체는 누구나 접근할 수 있도록 허용해야 무한 루프가 발생하지 않습니다.
                         .requestMatchers("/users/login").permitAll()
-
+                        .requestMatchers("/booking/**").authenticated()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/", "/packages/**", "/users/signup").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -50,7 +51,10 @@ public class SecurityConfig {
                         .clearAuthentication(true)
                 )
                 // 4. CSRF 설정
-                .csrf(withDefaults());
+                .csrf(csrf -> csrf
+                        // 문제가 발생하는 /booking/prepare 와 /booking/verify 경로에 대해서만 CSRF 보호를 비활성화합니다.
+                        .ignoringRequestMatchers("/booking/prepare", "/booking/verify")
+                );
 
         return http.build();
     }
