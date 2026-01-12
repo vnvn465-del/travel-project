@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- ★★★ layout:decorate 속성으로 사용할 레이아웃 파일을 지정합니다. ★★★ -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{users/mypage/layout}">
+
+<!--
+  <head> 태그 안에 title을 정의하면, layout.html의 title이 이 내용으로 바뀝니다.
+  이 파일의 나머지 head 내용은 layout.html의 head와 병합됩니다.
+-->
+<head>
+    <title>나의 예약 내역</title>
+</head>
+
+<body>
+<!-- ★★★ layout:fragment="content" : layout.html의 content 부분을 이 내용으로 채웁니다. ★★★ -->
+<section layout:fragment="content">
+    <h1>나의 예약 내역</h1>
+    <div th:if="${bookings.isEmpty()}" class="no-content">
+        <p>예약 내역이 없습니다.</p>
+    </div>
+    <div th:unless="${bookings.isEmpty()}" class="booking-list">
+        <!-- ... (이전과 동일한 예약 카드 목록 코드) ... -->
+        <div th:each="booking : ${bookings}" class="booking-card">
+            <img th:src="${booking.thumbnailImageUrl}" alt="상품 이미지" class="booking-card-image">
+            <div class="booking-info">
+                <span class="status"
+                      th:classappend="${booking.status.name() == 'CONFIRMED'} ? 'confirmed' : (${booking.status.name() == 'CANCELLED'} ? 'cancelled' : 'pending')"
+                      th:text="${booking.status.name()}"></span>
+                <h3><a th:href="@{'/users/mypage/bookings/' + ${booking.bookingId}}" th:text="${booking.productName}"></a></h3>
+                <p>예약 번호: <span th:text="${booking.bookingNumber}"></span></p>
+                <p>출발일: <span th:text="${booking.departureDate}"></span></p>
+            </div>
+            <div class="booking-actions">
+                <strong th:text="|₩${#numbers.formatInteger(booking.totalPrice, 3, 'COMMA')}|"></strong>
+                <a th:href="@{'/users/mypage/bookings/' + ${booking.bookingId}}" class="btn">상세보기</a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

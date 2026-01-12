@@ -52,6 +52,8 @@ dependencies {
     // JitPack 리포지토리에 있는 아임포트 라이브러리
     implementation 'com.github.iamport:iamport-rest-client-java:0.2.23'
 
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
 }
 
 test {

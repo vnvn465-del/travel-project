@@ -33,10 +33,10 @@ $(document).ready(function() {
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(bookingData),
-            beforeSend: function(xhr) {
-                // AJAX 요청을 보내기 직전에, 헤더에 CSRF 토큰을 추가합니다.
-                xhr.setRequestHeader(csrfHeader, csrfToken);
-            },
+//            beforeSend: function(xhr) {
+//                // AJAX 요청을 보내기 직전에, 헤더에 CSRF 토큰을 추가합니다.
+//                xhr.setRequestHeader(csrfHeader, csrfToken);
+//            },
             success: function(booking) {
                 // 4. 서버로부터 성공적으로 예약 정보를 받으면, 해당 정보로 결제창을 호출합니다.
                 if (booking && booking.bookingNumber) {
@@ -60,7 +60,7 @@ $(document).ready(function() {
     function requestPay(booking) {
         IMP.request_pay({
             // KG이니시스 테스트 환경의 불안정성을 피해, 가장 안정적인 다날 테스트 PG를 사용합니다.
-            pg: "danal_tpay.9810030929",
+            pg: "html5_inicis.INIpayTest",
             pay_method: "card",
             merchant_uid: booking.bookingNumber,  // 우리가 생성한 고유 예약 번호
             name: booking.packageInfo.name,       // 상품명
@@ -88,9 +88,9 @@ $(document).ready(function() {
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify({ impUid: impUid, merchantUid: merchantUid }),
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader(csrfHeader, csrfToken);
-},
+//            beforeSend: function(xhr) {
+//                xhr.setRequestHeader(csrfHeader, csrfToken);
+//},
             success: function() {
                 // 6. 최종 검증까지 성공하면, 예약 완료 페이지로 이동합니다.
                 window.location.href = '/booking/success';

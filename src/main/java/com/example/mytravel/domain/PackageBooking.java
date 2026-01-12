@@ -25,4 +25,7 @@ public class PackageBooking extends Booking {
 
     @Column(nullable = false)
     private int travelerCount; // 총 여행 인원
+
+    @OneToOne(mappedBy = "booking", fetch = FetchType.LAZY)
+    private Payment payment;
 }

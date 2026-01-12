@@ -10,7 +10,7 @@ INSERT INTO theme (name) VALUES ('가족여행'), ('허니문'), ('골프'), ('�
 -- =================================================================
 -- 인기 상품 (is_popular = true) 5개 --
 INSERT INTO travel_package (name, country, city, description, price, travel_period, departure_date_start, departure_date_end, min_travelers, max_travelers, status, is_popular)
-VALUES ('제주도 힐링 완전 정복', '대한민국', '제주', '푸른 바다와 오름이 펼쳐진 환상의 섬, 제주에서 완벽한 휴식을 경험하세요.', 780000, '2박 3일', '2025-10-01', '2025-12-31', 2, 10, 'ON_SALE', true);
+VALUES ('제주도 힐링 완전 정복', '대한민국', '제주', '푸른 바다와 오름이 펼쳐진 환상의 섬, 제주에서 완벽한 휴식을 경험하세요.', 1, '2박 3일', '2025-10-01', '2025-12-31', 2, 10, 'ON_SALE', true);
 INSERT INTO travel_package (name, country, city, description, price, travel_period, departure_date_start, departure_date_end, min_travelers, max_travelers, status, is_popular)
 VALUES ('활기찬 항구 도시 부산으로', '대한민국', '부산', '광안대교의 야경과 신선한 해산물, 활기찬 해변을 모두 즐길 수 있는 최고의 선택입니다.', 620000, '2박 3일', '2025-09-01', '2025-12-31', 2, 12, 'ON_SALE', true);
 INSERT INTO travel_package (name, country, city, description, price, travel_period, departure_date_start, departure_date_end, min_travelers, max_travelers, status, is_popular)

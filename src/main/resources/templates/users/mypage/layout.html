@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title layout:title-pattern="$CONTENT_TITLE - My Travel">마이페이지</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/pages/mypage.css}">
+</head>
+<body>
+<th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+
+<div class="mypage-container">
+  <!-- 사이드바 메뉴 -->
+  <aside class="mypage-sidebar">
+    <ul class="sidebar-nav">
+      <!-- ★★★ #httpServletRequest 대신, 컨트롤러가 전달한 'currentUrl' 변수를 사용합니다. ★★★ -->
+      <li><a th:href="@{/users/mypage/bookings}" th:classappend="${#strings.startsWith(currentUrl, '/users/mypage/bookings')} ? 'active'">나의 예약 내역</a></li>
+      <li><a th:href="@{/users/mypage/wishlist}" th:classappend="${currentUrl == '/users/mypage/wishlist'} ? 'active'">찜 목록</a></li>
+      <li><a th:href="@{/users/mypage/profile}" th:classappend="${currentUrl == '/users/mypage/profile'} ? 'active'">회원 정보 수정</a></li>
+    </ul>
+  </aside>
+
+  <!-- 각 페이지의 실제 컨텐츠가 들어갈 부분 -->
+  <main class="mypage-content" layout:fragment="content">
+    <p>이 내용은 각 페이지의 컨텐츠로 교체됩니다.</p>
+    main>
+</div>
+
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+</body>
+</html>

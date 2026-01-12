@@ -25,9 +25,9 @@ spring:
 
   #Mysql설정
   datasource:
-    url: jdbc:mysql://localhost:3306/travel
+    url: jdbc:mysql://db:3306/travel
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: travel
+    username: root
     password: 1234
 
 iamport:

@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  # 1. 데이터베이스 설정 (MySQL)
+  db:
+    image: mysql:8.0
+    container_name: travel-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: travel
+      MYSQL_ROOT_PASSWORD: 1234
+    networks:
+      - travel-network
+
+  # 2. 애플리케이션 설정 (Spring Boot)
+  web:
+    build: .
+    container_name: my-travel-web
+    ports:
+      - "8090:8090"
+    depends_on:
+      - db
+    networks:
+      - travel-network
+
+networks:
+  travel-network:
